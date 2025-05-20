@@ -1,5 +1,5 @@
-const fastify = require('fastify');
-const { PrismaClient } = require('@prisma/client');
+import fastify from 'fastify';
+import { PrismaClient } from '@prisma/client';
 
 const fastifyInstance = fastify({ logger: true });
 const prisma = new PrismaClient();
@@ -31,4 +31,4 @@ fastifyInstance.get('/api/vehicles/movements', async (request, reply) => {
   return resultado;
 });
 
-module.exports = fastifyInstance;
+export default fastifyInstance;
