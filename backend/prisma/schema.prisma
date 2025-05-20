@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Doorman {
+  id Int @id @default(autoincrement())
+  name String
+  cpf String @unique
+  user String @unique
+  passwordHash String
+  createdAt DateTime @default(now())
+  movements Movements[] 
+}
+
+model Vehicle {
+  id Int @id @default(autoincrement())
+  plate String @unique
+  model String
+  brand String
+  driverName String
+  createdAt DateTime @default(now())
+  movements Movements[]
+}
+
+model Movements {
+  id Int @id @default(autoincrement())
+  doormanId Int
+  vehicleId Int
+  doorman Doorman @relation(fields: [doormanId], references: [id])
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  type String // "entry" or "exit"
+  date DateTime @default(now()) // Data inserida pelo usuário
+  createdAt DateTime @default(now()) // Data em que foi inserido no banco
+  notes String?
+}
