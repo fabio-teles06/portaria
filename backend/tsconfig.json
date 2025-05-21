@@ -13,11 +13,6 @@
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": "./",
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        },
     },
     "ts-node": {
         "compilerOptions": {
